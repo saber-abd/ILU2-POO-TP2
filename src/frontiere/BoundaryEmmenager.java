@@ -40,6 +40,29 @@ public class BoundaryEmmenager {
 	}
 
 	private void emmenagerDruide(String nomVisiteur) {
-		//TODO a completer
+		StringBuilder question = new StringBuilder();
+		question.append("Quel est votre nom de druide ?\n");
+		String nomDruide = Clavier.entrerChaine(question.toString());
+		System.out.println("Bienvenue druide " + nomDruide);
+		StringBuilder questionDruide = new StringBuilder();
+		questionDruide.append("\nQuelle est votre force ?\n");
+		int force = Clavier.entrerEntier(questionDruide.toString());
+		int effetPotionMax;
+		int effetPotionMin;
+		StringBuilder qEffetPotionMin = new StringBuilder();
+		StringBuilder qEffetPotionMax = new StringBuilder();
+		qEffetPotionMin.append("Quel est l'effet minimal de votre potion ?\n");
+		qEffetPotionMax.append("Quel est l'effet maximal de votre potion ?\n");
+		do {
+			effetPotionMin = Clavier.entrerEntier(qEffetPotionMin.toString());
+			effetPotionMax = Clavier.entrerEntier(qEffetPotionMax.toString());
+			if (effetPotionMax < effetPotionMin) {
+				System.out.println(
+						"Attention druide vous vous êtes trompé entre le minimum et le maximum");
+			}
+		} while (effetPotionMax < effetPotionMin);
+		controlEmmenager.ajouterDruide(nomVisiteur, force, effetPotionMin,
+				effetPotionMax);
+		System.out.println("Vous êtes maintenant un habitant du village !");
 	}
 }
