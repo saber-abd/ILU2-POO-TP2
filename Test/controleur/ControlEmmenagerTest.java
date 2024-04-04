@@ -7,42 +7,47 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import personnages.Chef;
 import villagegaulois.Village;
 
 class ControlEmmenagerTest {
-    private Village village;
+	private Village village;
+	private Chef asterix;
 
-    @BeforeEach
-    void setUp() {
-        village = new Village("Village Gaulois", 30, 15);
-    }
-
-    @Test
-    void testControlEmmenager() {
-		ControlEmmenager control = new ControlEmmenager(village);
-		assertNotNull(control, "Constructeur ne renvoie pas null");
+	@BeforeEach
+	public void initialiserSituation() {
+		System.out.println("Initialisation...");
+		village = new Village("le village des irréductibles", 10, 5);
+		asterix = new Chef("Abraracourcix", 10, village);
+		village.setChef(asterix);
 	}
-    
-    @Test
-    void testIsHabitant() {
-    	ControlEmmenager control = new ControlEmmenager(village);
-        control.ajouterGaulois("Asterix", 10);;
-        assertTrue(control.isHabitant("Asterix"));
-        assertFalse(control.isHabitant("Existe pas"));
-		control.ajouterDruide("Panoramix", 10, 1, 5);
-		assertTrue(control.isHabitant("Panoramix"));
-    }
 
+	@Test
+	void testControlEmmenager() {
+		ControlEmmenager controlEmmenager = new ControlEmmenager(village);
+		assertNotNull(controlEmmenager, "Constructeur ne renvoie pas null");
+	}
 
-    @Test
-    void testAjouterDruide() {
-    	ControlEmmenager control = new ControlEmmenager(village);
-        control.ajouterDruide("Panoramix", 5, 10, 50);
-    }
+	@Test
+	void testIsHabitant() {
+		ControlEmmenager controlEmmenager = new ControlEmmenager(village);
+		controlEmmenager.ajouterGaulois("Bonemine", 10);
+		assertTrue(controlEmmenager.isHabitant("Bonemine"));
+		assertFalse(controlEmmenager.isHabitant("Existe pas"));
+		controlEmmenager.ajouterDruide("Panoramix", 10, 1, 5);
+		assertTrue(controlEmmenager.isHabitant("Panoramix"));
+	}
 
-    @Test
-    void testAjouterGaulois() {
-    	ControlEmmenager control = new ControlEmmenager(village);
-        control.ajouterGaulois("Obelix", 10);
-    }
+	@Test
+	void testAjouterDruide() {
+		ControlEmmenager controlEmmenager = new ControlEmmenager(village);
+		controlEmmenager.ajouterDruide("Panoramix", 10, 1, 5);
+	}
+
+	@Test
+	void testAjouterGaulois() {
+		ControlEmmenager controlEmmenager = new ControlEmmenager(village);
+		controlEmmenager.ajouterGaulois("Bonemine", 10);
+	}
+
 }
